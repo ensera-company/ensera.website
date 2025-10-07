@@ -1,0 +1,93 @@
+name: Angular CI
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - "src/**"
+      - "projects/**"
+      - "angular.json"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig*.json"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+# Cancel older parallel runs of the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Set this if your Angular project lives in a subfolder:
+    # defaults:
+    #   run:
+    #     working-directory: ./your-subfolder
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20 (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            **/package-lock.json
+
+      - name: Cache Angular CLI build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.angular/cache
+          key: angular-cache-${{ runner.os }}-${{ hashFiles('**/angular.json', '**/package-lock.json') }}
+          restore-keys: |
+            angular-cache-${{ runner.os }}-
+
+      # If you use private registries, add NODE_AUTH_TOKEN via repo secret
+      # - name: Configure npm auth (optional)
+      #   run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies (npm ci)
+        run: npm ci
+
+      # If you need environment files from secrets, generate them here (optional)
+      # - name: Generate environment.ts
+      #   run: |
+      #     mkdir -p src/environments
+      #     cat > src/environments/environment.prod.ts <<'EOF'
+      #     export const environment = {
+      #       production: true,
+      #       apiBaseUrl: '${{ secrets.API_BASE_URL }}'
+      #     };
+      #     EOF
+
+      - name: Build (production)
+        run: |
+          # Prefer project:target if you have multiple projects
+          # npx ng build my-app --configuration=production
+          npx ng build --configuration=production
+
+      # Upload compiled app as artifact for later jobs (deploy, etc.)
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: |
+            dist/**
+          retention-days: 7
+
+      # Optional: run unit tests
+      # - name: Test
+      #   run: npx ng test --watch=false --browsers=ChromeHeadless
+
+      # Optional: run lint
+      # - name: Lint
+      #   run: npx ng lint
