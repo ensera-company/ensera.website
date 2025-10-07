@@ -1,0 +1,93 @@
+:host {
+  display: block;
+  background: var(--blackColor);
+  color: var(--whiteColor);
+}
+
+.head { text-align: center; }
+
+/* Accent bar */
+.accent-wrap {
+  position: relative; height: 10px; margin: 10px 0 24px;
+}
+.accent {
+  height: 8px; width: 60%;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    var(--mainColor),
+    color-mix(in srgb, var(--mainColor) 45%, transparent)
+  );
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--mainColor) 35%, transparent);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Card */
+.card {
+  position: relative;
+  grid-column: span 12;
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+  border: 1px dashed var(--borderColor);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 0 1px rgba(36,49,74,.25), 0 8px 24px rgba(0,0,0,.28);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+
+  /* entrance */
+  opacity: 0; transform: translateY(12px);
+  animation: in .5s ease forwards;
+  animation-delay: calc(var(--i) * 70ms);
+
+  /* hover tilt (CSS only) */
+  perspective: 900px;
+  &:hover { transform: translateY(-6px) rotateX(1.2deg); box-shadow: 0 12px 28px rgba(0,0,0,.35); border-color: color-mix(in srgb, var(--mainColor) 50%, var(--borderColor)); }
+}
+
+@keyframes in { to { opacity: 1; transform: translateY(0); } }
+
+/* Layout variants for visual rhythm */
+.card:nth-child(3n+1) { grid-column: span 5; }
+.card:nth-child(3n+2) { grid-column: span 4; }
+.card:nth-child(3n+3) { grid-column: span 3; }
+
+@media (max-width: 991px) {
+  .card:nth-child(n) { grid-column: span 6; }
+}
+@media (max-width: 575px) {
+  .card:nth-child(n) { grid-column: span 12; }
+}
+
+/* Content */
+.ring {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: grid; place-items: center; margin-bottom: 12px;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--mainColor) 22%, transparent),
+    transparent);
+  i { font-size: 22px; color: var(--mainColor); }
+}
+
+.title { font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; color: var(--whiteColor); }
+.blurb { color: var(--mutedText); }
+
+.chips {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+  li {
+    border: 1px solid var(--borderColor);
+    padding: 6px 10px; border-radius: 999px;
+    font-size: .85rem; color: var(--whiteColor);
+    background: color-mix(in srgb, var(--mainColor) 10%, transparent);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; opacity: 1; transform: none; }
+}

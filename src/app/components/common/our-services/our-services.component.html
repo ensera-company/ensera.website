@@ -1,0 +1,26 @@
+<section id="services" class="services-creative pt-100 pb-75" aria-labelledby="services-title">
+  <div class="container">
+    <header class="section-title head">
+      <h2 id="services-title">{{ heading }} <span>{{ headingStrong }}</span></h2>
+      <p>{{ intro }}</p>
+    </header>
+
+    <!-- Accent stripe (subtle parallax) -->
+    <div class="accent-wrap" aria-hidden="true">
+      <div class="accent" [style.transform]="accentTransform(0.05)"></div>
+    </div>
+
+    <!-- Mosaic grid -->
+    <div class="grid" role="list">
+      <article class="card feature" role="listitem" *ngFor="let s of services(); let i = index" [style.--i]="i">
+        <div class="ring"><i [class]="s.icon" aria-hidden="true"></i></div>
+        <h3 class="title">{{ s.title }}</h3>
+        <p class="blurb">{{ s.blurb }}</p>
+
+        <ul class="chips" *ngIf="s.points?.length">
+          <li *ngFor="let p of s.points">{{ p }}</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>

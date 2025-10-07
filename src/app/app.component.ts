@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  providers: [
+    Location, {
+      provide: LocationStrategy,
+      useClass: PathLocationStrategy
+    }
+  ],
+  standalone: false,
 })
 export class AppComponent {
-  title = 'ensera';
 }

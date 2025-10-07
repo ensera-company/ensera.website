@@ -1,0 +1,134 @@
+<section id="contact" class="contact-area ptb-100 bg-f7f5f4" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="section-title">
+      <h4>{{ eyebrow }}</h4>
+      <h2 id="contact-title">
+        {{ titlePrefix }} <span>{{ titleStrong }}</span> {{ titleSuffix }}
+      </h2>
+      <p>{{ intro }}</p>
+    </div>
+
+    <div class="row">
+      <!-- Form -->
+      <div class="col-lg-7 col-md-12">
+        <div class="contact-form">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group mb-3">
+                  <label for="name">Name</label>
+                  <input id="name" type="text" class="form-control"
+                         formControlName="name"
+                         [attr.aria-invalid]="f.name.invalid && (f.name.touched || f.name.dirty)" />
+                  <small class="invalid" *ngIf="f.name.invalid && (f.name.touched || f.name.dirty)">
+                    Please enter your name (min 2 characters).
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group mb-3">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" class="form-control"
+                         formControlName="email"
+                         [attr.aria-invalid]="f.email.invalid && (f.email.touched || f.email.dirty)" />
+                  <small class="invalid" *ngIf="f.email.invalid && (f.email.touched || f.email.dirty)">
+                    Please enter a valid email address.
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group mb-3">
+                  <label for="subject">Subject</label>
+                  <input id="subject" type="text" class="form-control"
+                         formControlName="subject"
+                         [attr.aria-invalid]="f.subject.invalid && (f.subject.touched || f.subject.dirty)" />
+                  <small class="invalid" *ngIf="f.subject.invalid && (f.subject.touched || f.subject.dirty)">
+                    Please enter a subject (min 3 characters).
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group mb-3">
+                  <label for="number">Phone Number</label>
+                  <input id="number" type="tel" class="form-control"
+                         formControlName="number"
+                         [attr.aria-invalid]="f.number.invalid && (f.number.touched || f.number.dirty)" />
+                  <small class="invalid" *ngIf="f.number.invalid && (f.number.touched || f.number.dirty)">
+                    Please enter a valid phone number.
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-12">
+                <div class="form-group mb-3">
+                  <label for="message">Message</label>
+                  <textarea id="message" rows="4" class="form-control"
+                            formControlName="message"
+                            [attr.aria-invalid]="f.message.invalid && (f.message.touched || f.message.dirty)"></textarea>
+                  <small class="invalid" *ngIf="f.message.invalid && (f.message.touched || f.message.dirty)">
+                    Please share a few details (min 10 characters).
+                  </small>
+                </div>
+              </div>
+
+              <!-- Honeypot field (hidden from users, visible to bots) -->
+              <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+                <label for="company">Company</label>
+                <input id="company" type="text" formControlName="company" autocomplete="off" tabindex="-1" />
+              </div>
+
+              <div class="col-lg-12 col-md-12">
+                <button class="btn btn-primary"
+                        type="submit"
+                        [disabled]="submitting()"
+                        [class.disabled]="submitting()">
+                  {{ submitting() ? 'Sending…' : 'Send Message' }}
+                </button>
+
+                <!-- Feedback -->
+                <p class="form-feedback success" *ngIf="sent() === 'success'" role="status" aria-live="polite">
+                  Thanks! We’ll reach out shortly.
+                </p>
+                <p class="form-feedback error" *ngIf="sent() === 'error'" role="alert" aria-live="assertive">
+                  Sorry—something went wrong. Please try again or email us directly.
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Contact info -->
+      <div class="col-lg-5 col-md-12">
+        <div class="contact-info">
+          <div class="d-table">
+            <div class="d-table-cell">
+              <ul>
+                <li>
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Location:</span>{{ info.location }}
+                </li>
+                <li>
+                  <i class="far fa-envelope"></i>
+                  <a [href]="mailto()"><span>Email:</span>{{ info.email }}</a>
+                </li>
+                <li *ngIf="info.phone">
+                  <i class="fas fa-phone-alt"></i>
+                  <a [href]="tel()"><span>Call:</span>{{ info.phone }}</a>
+                </li>
+                <li *ngIf="info.fax">
+                  <i class="fas fa-fax"></i>
+                  <a [href]="fax()"><span>Fax:</span>{{ info.fax }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /info -->
+    </div>
+  </div>
+</section>

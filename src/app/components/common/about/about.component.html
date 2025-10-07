@@ -1,0 +1,87 @@
+<section id="about" class="about-area ptb-100" aria-labelledby="about-title">
+  <div class="container">
+    <!-- top title -->
+    <div class="section-title">
+      <h2 id="about-title">About <span>{{ brandName }}</span></h2>
+      <p>{{ aboutIntro }}</p>
+    </div>
+
+    <div class="row align-items-center">
+      <!-- left -->
+      <div class="col-lg-6 col-md-12">
+        <div class="about-content">
+          <ul class="features-list" [@featureStagger] role="list">
+            <li class="feature-item" role="listitem" *ngFor="let f of features()">
+              <i *ngIf="f.icon" [class]="f.icon" aria-hidden="true"></i>
+              {{ f.text }}
+            </li>
+          </ul>
+
+          <p class="about-note">
+            We focus on clean UI, accessible UX, and performance budgets to keep your site fast.
+          </p>
+        </div>
+      </div>
+
+      <!-- right -->
+      <div class="col-lg-6 col-md-12">
+        <figure class="about-video">
+          <img [src]="poster" alt="About {{ brandName }}" class="about-img" />
+          <div class="video-btn">
+            <button
+              type="button"
+              class="popup-youtube"
+              (click)="openPopup()"
+              aria-haspopup="dialog"
+              aria-controls="about-video-dialog"
+            >
+              <i class="fas fa-play" aria-hidden="true"></i>
+            </button>
+            <span class="pulse" aria-hidden="true"></span>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- Angular-bound parallax dots (no <script>) -->
+  <div class="about-parallax" aria-hidden="true">
+    <svg class="dots" viewBox="0 0 200 60" preserveAspectRatio="xMidYMid slice">
+      <circle #parallaxEl cx="10"  cy="10" r="2" class="d" [style.transform]="parallaxStyle(0.05)"></circle>
+      <circle #parallaxEl cx="60"  cy="30" r="2" class="d" [style.transform]="parallaxStyle(0.08)"></circle>
+      <circle #parallaxEl cx="120" cy="20" r="2" class="d" [style.transform]="parallaxStyle(0.06)"></circle>
+      <circle #parallaxEl cx="180" cy="40" r="2" class="d" [style.transform]="parallaxStyle(0.07)"></circle>
+    </svg>
+  </div>
+</section>
+
+<!-- popup -->
+@if (isOpen()) {
+  <div
+    id="about-video-dialog"
+    class="video-popup position-fixed d-flex align-items-center justify-content-center text-center top-0 start-0 end-0 bottom-0"
+    role="dialog"
+    aria-modal="true"
+    aria-label="About video"
+  >
+    <div class="popup-inner bg-white position-relative mx-auto">
+      <iframe
+        [src]="youtubeSrc"
+        title="About {{ brandName }}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+
+      <button
+        type="button"
+        class="close-btn p-0 border-0 d-flex align-items-center justify-content-center rounded-circle"
+        (click)="closePopup()"
+        aria-label="Close video"
+      >
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+}

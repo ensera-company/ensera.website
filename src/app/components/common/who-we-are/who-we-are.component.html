@@ -1,0 +1,38 @@
+<section class="who-creative" aria-labelledby="who-title">
+  <!-- particles backdrop inside section bounds -->
+  <ngx-particles
+    class="particles"
+    [options]="particlesOptions()"
+    (particlesLoaded)="particlesLoaded($event)">
+  </ngx-particles>
+
+  <!-- angled top edge -->
+  <div class="cut cut-top" aria-hidden="true"></div>
+
+  <div class="container">
+    <header class="intro">
+      <span class="kicker">{{ kicker }}</span>
+      <h2 id="who-title" class="title">
+        {{ title }} <span>{{ titleStrong }}</span>
+      </h2>
+      <p class="lede">{{ subtitle }}</p>
+    </header>
+
+    <!-- asymmetrical mosaic grid -->
+    <div class="mosaic" role="list">
+      <article class="card" role="listitem" *ngFor="let it of items; let i = index" [style.--i]="i">
+        <div class="badge" aria-hidden="true">{{ it.badge ?? (i+1) | number:'2.0' }}</div>
+        <div class="icon"><i [class]="it.icon" aria-hidden="true"></i></div>
+        <h3 class="card-title">{{ it.title }}</h3>
+        <p class="card-text">{{ it.text }}</p>
+        <div class="glow" aria-hidden="true"></div>
+      </article>
+    </div>
+  </div>
+
+  <!-- floating accent shape -->
+  <img class="shape" [src]="shapeUrl" alt="" aria-hidden="true" />
+
+  <!-- angled bottom edge -->
+  <div class="cut cut-bottom" aria-hidden="true"></div>
+</section>

@@ -1,0 +1,357 @@
+// Option 1: Subtle Watermark Logo (Recommended)
+.main-banner {
+  height: 850px;
+  overflow: hidden;
+  position: relative;
+  background: {
+    position: center center;
+    repeat: no-repeat;
+    size: cover;
+  };
+
+  // Logo watermark layer
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background-image: url('/images/logos/logo-symbol-1.png');
+    background: {
+      position: center;
+      repeat: no-repeat;
+      size: contain;
+    };
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+    // Optional: Add subtle animation
+    animation: logoFloat 8s ease-in-out infinite;
+  }
+
+  // Dark overlay (keep existing)
+  &::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    content: '';
+    height: 100%;
+    opacity: .58;
+    position: absolute;
+    background: var(--blackColor);
+    z-index: 0;
+  }
+}
+
+// Floating animation for logo
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -52%) scale(1.05);
+  }
+}
+
+// ==============================================
+// Option 2: Multi-Logo Pattern
+// ==============================================
+.main-banner-pattern {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/logos/logo-symbol-1.png');
+    background: {
+      position: center;
+      repeat: repeat;
+      size: 200px;
+    };
+    opacity: 0.05;
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+// ==============================================
+// Option 3: Corner Accent Logo
+// ==============================================
+.main-banner-corner {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 150px;
+    height: 150px;
+    background-image: url('/images/logos/logo-symbol-1.png');
+    background: {
+      position: center;
+      repeat: no-repeat;
+      size: contain;
+    };
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+// ==============================================
+// Option 4: Gradient Logo Blend
+// ==============================================
+.main-banner-gradient {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+    background-image: url('/images/logos/logo-symbol-1.png');
+    background: {
+      position: center;
+      repeat: no-repeat;
+      size: contain;
+    };
+    opacity: 0.12;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    filter: blur(2px);
+  }
+}
+
+// ==============================================
+// Option 5: Gold Accent Logo with Glow
+// ==============================================
+.main-banner-glow {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background-image: url('/images/logos/logo-symbol-1.png');
+    background: {
+      position: center;
+      repeat: no-repeat;
+      size: contain;
+    };
+    opacity: 0.1;
+    z-index: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 0 40px rgba(198, 166, 100, 0.3));
+  }
+}
+
+// Update text to ensure it's above the logo
+.main-banner-text {
+  position: relative;
+  z-index: 2; // Increased from 1
+
+  h4 {
+    color: var(--whiteColor);
+    font: {
+      weight: 400;
+      size: 20px;
+    };
+  }
+  h1 {
+    color: var(--whiteColor);
+    margin: {
+      top: 30px;
+      bottom: 30px;
+    };
+    font: {
+      weight: 400;
+      size: 55px;
+    };
+    span {
+      color: #C6A664;
+      font-weight: 600;
+    }
+  }
+  p {
+    color: var(--whiteColor);
+    margin-bottom: 30px;
+    font-size: 15.5px;
+    max-width: 650px;
+  }
+  .btn {
+    margin-right: 14px;
+
+    &:hover, &:focus {
+      border-color: var(--whiteColor);
+    }
+  }
+  .view-work {
+    background: transparent;
+    border-color: var(--whiteColor);
+
+    &:hover, &:focus {
+      border-color: var(--mainColor);
+      background: var(--mainColor);
+      color: var(--whiteColor);
+    }
+  }
+}
+
+.waves {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 80px;
+  max-height: 80px;
+  position: absolute;
+  z-index: 2;
+}
+
+// Responsive adjustments
+@media only screen and (max-width : 767px) {
+  .main-banner {
+    &::after {
+      width: 300px;
+      height: 300px;
+    }
+  }
+}
+
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+  .main-banner {
+    &::after {
+      width: 450px;
+      height: 450px;
+    }
+  }
+}
+
+.waves {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 80px;
+  max-height: 80px;
+  position: absolute;
+}
+.parallax>use {
+  animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+
+  &:nth-child(1) {
+    animation: {
+      delay: -2s;
+      duration: 7s;
+    };
+  }
+  &:nth-child(2) {
+    animation: {
+      delay: -3s;
+      duration: 10s;
+    };
+  }
+  &:nth-child(3) {
+    animation: {
+      delay: -4s;
+      duration: 13s;
+    };
+  }
+  &:nth-child(4) {
+    animation: {
+      delay: -5s;
+      duration: 20s;
+    };
+  }
+}
+
+/* Max width 767px */
+@media only screen and (max-width : 767px) {
+
+  .main-banner {
+    height: auto;
+    padding: {
+      top: 175px;
+      bottom: 120px;
+    };
+  }
+  .main-banner-text {
+    h4 {
+      font-size: 15px;
+    }
+    h1 {
+      font-size: 30px;
+      line-height: 40px;
+      margin: {
+        top: 15px;
+        bottom: 15px;
+      };
+    }
+    p {
+      font-size: 14px;
+      max-width: 100%;
+    }
+    .btn {
+      margin-right: 8px;
+    }
+  }
+  .waves {
+    min-height: 50px;
+    max-height: 50px;
+  }
+
+}
+
+/* Min width 576px to Max width 767px */
+@media only screen and (min-width : 576px) and (max-width : 767px) {}
+
+/* Min width 768px to Max width 991px */
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+  .main-banner {
+    height: auto;
+    padding: {
+      top: 175px;
+      bottom: 120px;
+    };
+  }
+  .main-banner-text {
+    h4 {
+      font-size: 17px;
+    }
+    h1 {
+      font-size: 40px;
+      margin: {
+        bottom: 20px;
+        top: 25px;
+      };
+    }
+  }
+
+}
+
+/* Min width 992px to Max width 1199px */
+@media only screen and (min-width : 992px) and (max-width : 1199px) {
+
+  .main-banner-text {
+    margin-top: 30px;
+  }
+
+}
+
+/* Min width 1200px to Max width 1399px */
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
+
+/* Min width 1600px */
+@media only screen and (min-width: 1600px) {
+
+  .main-banner {
+    height: 100vh;
+  }
+
+}

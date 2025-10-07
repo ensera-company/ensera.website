@@ -1,0 +1,59 @@
+<section class="faq-area ptb-100" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-title">
+      <h2 id="faq-title">{{ titlePrefix }} <span>{{ titleStrong }}</span></h2>
+      <p>{{ intro }}</p>
+    </div>
+
+    <div class="row">
+      <!-- Left: Accordion -->
+      <div class="col-lg-7 col-md-12">
+        <div class="faq-accordion" role="region" aria-labelledby="faq-title">
+          <div class="accordion">
+            <div class="accordion-section" *ngFor="let it of items; let i = index">
+              <!-- Use button for proper a11y; keep your class names so global styles apply -->
+              <button
+                type="button"
+                class="accordion-header"
+                [class.open]="isOpen(i)"
+                [attr.id]="headerId(i)"
+                [attr.aria-controls]="panelId(i)"
+                [attr.aria-expanded]="isOpen(i)"
+                (click)="toggle(i)"
+                (keydown)="onHeaderKey(i, $event)"
+              >
+                <span class="q">{{ it.q }}</span>
+                <i class="fa-solid fa-chevron-down caret" aria-hidden="true"></i>
+              </button>
+
+              <div
+                class="accordion-content"
+                [@expandCollapse]
+                *ngIf="isOpen(i)"
+                role="region"
+                [attr.id]="panelId(i)"
+                [attr.aria-labelledby]="headerId(i)"
+              >
+                <p class="a">{{ it.a }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: visual (with optional parallax transform) -->
+      <div class="col-lg-5 col-md-12">
+        <figure class="faq-image" [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }">
+          <img
+            [src]="imageUrl"
+            [alt]="imageAlt"
+            loading="lazy"
+            decoding="async"
+            [style.transform]="parallaxStyle(0.05)"
+          />
+          <div class="overlay" aria-hidden="true"></div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

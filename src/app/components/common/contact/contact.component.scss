@@ -1,0 +1,181 @@
+#map {
+	width: 100%;
+	height: 370px;
+}
+.contact-info {
+	box-shadow: 0 0 30px 0 rgba(67, 67, 67, 0.15);
+	background: var(--whiteColor);
+    padding: 30px;
+    height: 100%;
+    border: {
+        top: 3px solid var(--mainColor);
+        bottom: 3px solid var(--mainColor);
+    };
+    ul {
+        li {
+            font-size: 16px;
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 34px;
+            color: var(--fontColor);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+            a {
+                display: inline-block;
+            }
+            span {
+                display: block;
+                margin-bottom: 5px;
+                color: var(--fontColor);
+                font: {
+                    size: 20px;
+                    weight: 500;
+                };
+            }
+            i {
+                left: 0;
+                top: 50%;
+                width: 45px;
+                height: 45px;
+                font-size: 19px;
+                line-height: 45px;
+                text-align: center;
+                border-radius: 50%;
+                position: absolute;
+                background: #f6f6f6;
+                color: var(--mainColor);
+                transform: translateY(-50%);
+                transition: var(--transition);
+            }
+            &:hover {
+                i {
+                    background-color: var(--mainColor);
+                    color: var(--whiteColor);
+                }
+            }
+        }
+    }
+}
+.contact-form {
+	box-shadow: 0 0 30px 0 rgba(67, 67, 67, 0.15);
+    background: var(--whiteColor);
+	padding: 30px;
+    border: {
+        top: 3px solid var(--mainColor);
+        bottom: 3px solid var(--mainColor);
+    };
+    h3 {
+        color: var(--mainColor);
+        margin-bottom: 25px;
+        font: {
+            size: 20px;
+            weight: 600;
+        };
+    }
+    .form-control {
+        border-radius: 3px;
+
+        &:focus {
+            border-color: var(--mainColor);
+        }
+    }
+    label {
+        margin-bottom: .5rem;
+    }
+    .btn {
+        margin-top: 15px;
+    }
+    #message {
+        height: auto;
+        padding: 15px;
+    }
+}
+
+/* Max width 767px */
+@media only screen and (max-width : 767px) {
+
+    .contact-info {
+        padding: 30px 20px;
+        height: auto;
+
+        ul {
+            li {
+                font-size: 14px;
+
+                span {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    .contact-form {
+		padding: 30px 20px;
+        margin-bottom: 30px;
+
+        label {
+            font-size: 14px;
+        }
+        form {
+            .btn {
+                padding: 11px 25px 10px;
+            }
+        }
+    }
+
+}
+
+/* Min width 576px to Max width 767px */
+@media only screen and (min-width : 576px) and (max-width : 767px) {}
+
+/* Min width 768px to Max width 991px */
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+    .contact-form {
+		margin-bottom: 30px;
+    }
+    .contact-info {
+        height: auto;
+    }
+
+}
+
+/* Min width 992px to Max width 1199px */
+@media only screen and (min-width : 992px) and (max-width : 1199px) {}
+
+/* Min width 1200px to Max width 1399px */
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
+
+/* Min width 1600px */
+@media only screen and (min-width: 1600px) {}
+:host { display: block; }
+
+/* inherit your bg-f7f5f4 light surface + dark-mode overrides */
+.contact-area { position: relative; }
+
+.contact-form {
+  .form-group { position: relative; }
+  .invalid {
+    display: block;
+    margin-top: 6px;
+    font-size: .85rem;
+    color: #ff8080;
+  }
+}
+
+/* feedback badges */
+.form-feedback {
+  margin-top: 8px;
+  &.success { color: #5ad27d; }
+  &.error   { color: #ff8080; }
+}
+
+/* button */
+.btn.disabled { opacity: .75; cursor: not-allowed; }
+
+/* make right card pop a bit on your dark theme */
+.contact-info {
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+}

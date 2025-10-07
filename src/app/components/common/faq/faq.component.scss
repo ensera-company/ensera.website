@@ -1,0 +1,85 @@
+:host {
+  display: block;
+  background: var(--blackColor);
+  color: var(--whiteColor);
+}
+
+.faq-area { position: relative; }
+
+/* Accordion (inherits your global dark styles) */
+.faq-accordion .accordion {
+  display: grid; gap: 10px;
+}
+
+.accordion-section {
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background: var(--surface-1);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(36,49,74,.25), 0 8px 24px rgba(0,0,0,.22);
+
+  .accordion-header {
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+    font-weight: 600;
+    color: var(--whiteColor);
+    background: var(--surface-1);
+    border: 0;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+
+    .q { line-height: 1.4; }
+    .caret {
+      transition: transform .2s ease;
+      color: var(--mainColor);
+    }
+
+    &:hover,
+    &.open {
+      background: var(--mainColor);
+      color: var(--whiteColor);
+
+      .caret { transform: rotate(180deg); color: var(--whiteColor); }
+    }
+  }
+
+  .accordion-content {
+    padding: 14px 16px 16px;
+    color: var(--mutedText);
+    background: var(--surface-2);
+
+    .a { margin: 0; }
+  }
+}
+
+/* Right image panel */
+.faq-image {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,.28);
+
+  img {
+    /* keeps SEO/CLS but we use bg cover for art direction; still visible with a subtle parallax */
+    width: 100%; height: auto; display: block; opacity: 0.001; /* effectively hidden but accessible */
+  }
+
+  .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--blackColor) 26%, transparent),
+      transparent 40%,
+      color-mix(in srgb, var(--blackColor) 30%, transparent)
+    );
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .faq-image img { transform: none !important; }
+}

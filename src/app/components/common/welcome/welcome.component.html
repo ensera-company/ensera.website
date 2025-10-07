@@ -1,0 +1,29 @@
+<!-- welcome-section.component.html -->
+<section id="welcome" class="welcome-area pt-100" aria-labelledby="welcome-title">
+  <div class="container">
+    <header class="section-title" [@fadeUp]>
+      <h4 class="eyebrow">{{ headingSmall }}</h4>
+      <h2 id="welcome-title" class="headline">
+        {{ headingLargePrefix }} <span class="brand">{{ brandName }}</span>
+      </h2>
+      <p class="lede">{{ intro }}</p>
+    </header>
+
+    <div class="grid" [@staggerIn] role="list">
+      <article class="card"  *ngFor="let f of features()">
+        <div class="icon">
+          <i [class]="f.icon" aria-hidden="true"></i>
+        </div>
+        <h3 class="card-title">{{ f.title }}</h3>
+        <p class="card-text">{{ f.text }}</p>
+        <button class="link-btn"
+                type="button"
+                (click)="onLink(f.cta?.sectionId)"
+                [attr.aria-label]="f.cta?.text ?? 'Read more'">
+          <span>{{ f.cta?.text ?? 'Read more' }}</span>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </article>
+    </div>
+  </div>
+</section>

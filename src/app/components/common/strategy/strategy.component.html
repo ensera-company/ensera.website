@@ -1,0 +1,56 @@
+<section class="strategy-area" aria-labelledby="strategy-title">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Left: image panel (covers, with actual <img> for SEO/CLS) -->
+      <div class="col-lg-6 col-md-12">
+        <figure class="strategy-image" [ngStyle]="bgStyle()">
+          <img
+            [src]="imageUrl"
+            [alt]="imageAlt"
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 991px) 100vw, 50vw"
+            srcset="
+              {{imageUrl}} 1024w
+            "
+          />
+          <div class="overlay"></div>
+        </figure>
+      </div>
+
+      <!-- Right: content -->
+      <div class="col-lg-6 col-md-12">
+        <div class="strategy-content ptb-75">
+          <div class="section-title">
+            <h4>{{ eyebrow }}</h4>
+            <h2 id="strategy-title">
+              {{ titlePrefix }} <span>{{ titleStrong }}</span>
+            </h2>
+            <p>{{ introTop }}</p>
+          </div>
+
+          <ul class="features-list" [@featureStagger] role="list">
+            <li class="feature-item" role="listitem" *ngFor="let f of features()">
+              <i *ngIf="f.icon" [class]="f.icon" aria-hidden="true"></i>
+              {{ f.text }}
+            </li>
+          </ul>
+
+          <p class="end-note">{{ introBottom }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative shape with parallax (Angular binding) -->
+  <div class="shape1">
+    <img
+      [src]="shapeUrl"
+      alt=""
+      aria-hidden="true"
+      [style.transform]="parallax(0.08)"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>

@@ -1,0 +1,286 @@
+.about-area {
+    z-index: 1;
+    position: relative;
+    background: {
+        position: center center;
+        repeat: no-repeat;
+        size: cover;
+    };
+}
+.about-content {
+    .section-title {
+        margin-bottom: 20px;
+        padding-left: 0;
+
+        &::before, &::after {
+            display: none;
+        }
+        h2 {
+            font-size: 23px;
+        }
+        p {
+            font-size: 15.5px;
+        }
+    }
+    .features-list {
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+        display: flex;
+
+        li {
+            margin-bottom: 10px;
+            color: #727695;
+            max-width: 50%;
+            flex: 0 0 50%;
+            font: {
+                size: 15.5px;
+            };
+            i {
+                color: var(--mainColor);
+                margin-right: 7px;
+            }
+        }
+    }
+}
+.about-video {
+    position: relative;
+
+    .video-btn {
+        top: 50%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        position: absolute;
+        transform: translateY(-50%);
+
+        button {
+            z-index: 1;
+            width: 90px;
+            height: 90px;
+            border: none;
+            font-size: 35px;
+            line-height: 92px;
+            border-radius: 50%;
+            position: relative;
+            display: inline-block;
+            color: var(--mainColor);
+            transition: var(--transition);
+            background-color: var(--whiteColor);
+
+            &::after, &::before {
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: -1;
+                content: '';
+                display: block;
+                position: absolute;
+                border-radius: 50%;
+                border: 1px solid var(--whiteColor);
+            }
+            &::before {
+                animation: ripple 2s linear infinite
+            }
+            &::after {
+                animation: ripple 2s linear 1s infinite
+            }
+            &:hover {
+                background-color: var(--mainColor);
+                color: var(--whiteColor);
+            }
+        }
+    }
+}
+
+/* Max width 767px */
+@media only screen and (max-width : 767px) {
+
+    .about-content {
+        .section-title {
+            h2 {
+                margin-top: -17px;
+                line-height: 1.5;
+                font-size: 18px;
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+        .features-list {
+            li {
+                flex: 0 0 100%;
+                max-width: 100%;
+                font-size: 14px;
+            }
+        }
+    }
+    .about-video {
+        margin-top: 30px;
+
+        .video-btn {
+            button {
+                width: 70px;
+                height: 70px;
+                font-size: 25px;
+                line-height: 73px;
+            }
+        }
+    }
+
+}
+
+/* Min width 576px to Max width 767px */
+@media only screen and (min-width : 576px) and (max-width : 767px) {
+
+    .about-content {
+        .features-list {
+            li {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+    }
+
+}
+
+/* Min width 768px to Max width 991px */
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+    .about-video {
+        margin-top: 40px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+}
+
+/* Min width 992px to Max width 1199px */
+@media only screen and (min-width : 992px) and (max-width : 1199px) {}
+
+/* Min width 1200px to Max width 1399px */
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
+
+/* Min width 1600px */
+@media only screen and (min-width: 1600px) {}
+
+:host {
+  display: block;
+  color: var(--whiteColor);
+  background: var(--blackColor);
+}
+
+/* inner section-title just tightens spacing on the left column */
+.section-title.inner {
+  margin-bottom: 24px;
+
+  h2 { margin-bottom: 12px; }
+  p  { margin-top: 0; }
+}
+
+.about-content {
+  .about-note {
+    margin-top: 12px;
+    color: var(--mutedText);
+  }
+}
+
+/* staggered reveal for features list */
+.features-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--whiteColor);
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--borderColor);
+
+    i { color: var(--mainColor); }
+
+    &.reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: feature-in .5s ease forwards;
+      animation-delay: calc(var(--i) * 60ms);
+    }
+  }
+}
+
+@keyframes feature-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* video block */
+.about-video {
+  position: relative;
+  margin-top: 24px;
+
+  .about-img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0,0,0,.28);
+    display: block;
+  }
+
+  .video-btn {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+
+    .popup-youtube {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 0;
+      pointer-events: auto;
+      display: grid; place-items: center;
+      background: var(--mainColor);
+      color: var(--whiteColor);
+      box-shadow: 0 6px 20px color-mix(in srgb, var(--mainColor) 40%, transparent);
+      transition: transform .2s ease;
+
+      i { font-size: 20px; }
+      &:hover { transform: scale(1.04); }
+    }
+
+    /* use your global pulse keyframe if present */
+    .pulse {
+      position: absolute;
+      width: 64px; height: 64px;
+      border: 2px solid color-mix(in srgb, var(--mainColor) 70%, transparent);
+      border-radius: 50%;
+      transform: translate(-0, -0);
+      animation: pulse-border 1.8s ease-out infinite; /* defined in your globals */
+      pointer-events: none;
+    }
+  }
+}
+
+/* subtle parallax dots */
+.about-parallax {
+  position: relative;
+  margin-top: 40px;
+
+  .dots {
+    width: 100%;
+    height: 60px;
+    display: block;
+  }
+  .d {
+    fill: color-mix(in srgb, var(--whiteColor) 18%, transparent);
+    transition: transform .2s ease;
+  }
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .features-list .reveal { animation: none; opacity: 1; transform: none; }
+  [data-speed] { transform: none !important; }
+}
