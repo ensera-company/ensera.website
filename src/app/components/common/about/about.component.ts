@@ -42,7 +42,7 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
   ]);
 
 // optional media (keep/change as you like)
-  @Input() poster = 'images/about-company.jpg';
+  @Input() poster = 'images/about.jpg';
   @Input() youTubeId = 'VFNNIWw9W00';
 
   // popup
