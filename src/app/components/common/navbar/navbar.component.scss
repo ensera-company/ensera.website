@@ -94,7 +94,7 @@
         .navbar-nav {
             .nav-item {
                 .nav-link {
-                    color: var(--blackColor);
+                    color: var(--fontColor);
 
                     &.active, &.show, &:hover, &:focus {
                         color: var(--mainColor);
@@ -136,7 +136,7 @@
     }
     .navbar-light {
         .navbar-nav {
-            background-color: var(--whiteColor);
+            background-color: var(--blackColor);
             padding: 10px 20px;
             margin-top: 10px;
             display: none;
@@ -149,7 +149,7 @@
                     bottom: 10px;
                 };
                 .nav-link {
-                    color: var(--blackColor);
+                    color: var(--fontColor);
                     display: inline-block;
 
                     &.active, &:hover {
@@ -261,7 +261,7 @@
                     bottom: 10px;
                 };
                 .nav-link {
-                    color: var(--blackColor);
+                    color: var(--fontColor);
                     display: inline-block;
 
                     &.active, &:hover {
